@@ -42,6 +42,10 @@ Edit `upload-history.json`, tambah objek baru di array:
 
 - `status` harus salah satu: `TAYANG`, `TERJADWAL`, atau `ANTRE`.
 - `url` boleh string kosong (`""`) kalau belum ada link.
+- `tipe` (opsional): `SHORT` atau `LONG`. Kalau dikosongkan, ditebak dari
+  judul (mengandung kata "short"/"long"), kalau tidak ketemu tampil `-`.
+- `durasi` (opsional): teks bebas, mis. `"45 dtk"` atau `"14 mnt"`.
+  Untuk video di antrean, durasi dibaca otomatis via ffprobe dari `video_path`.
 - Setelah edit, jalankan `python3 dashboard.py` (atau tunggu update otomatis 30 menit).
 
 ## Mobile

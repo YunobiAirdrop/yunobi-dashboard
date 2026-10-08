@@ -22,6 +22,7 @@ import json
 import glob
 import os
 import re
+import subprocess
 import html as htmlmod
 from datetime import datetime, timedelta, timezone
 
@@ -96,6 +97,30 @@ def parse_dt(s):
 
 
 # --- 1. Antrean YouTube ---
+def probe_video(path):
+    """Probe durasi via ffprobe. Kembalikan (tipe, durasi_str) atau (None, None)."""
+    try:
+        r = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+             "-of", "csv=p=0", path],
+            capture_output=True, text=True, timeout=10)
+        secs = float(r.stdout.strip())
+        tipe = "SHORT" if secs <= 61 else "LONG"
+        dur = f"{int(round(secs))} dtk" if secs < 60 else f"{int(round(secs / 60))} mnt"
+        return tipe, dur
+    except Exception:
+        return None, None
+
+
+def tebak_tipe_dari_nama(nama):
+    n = (nama or "").lower()
+    if "short" in n:
+        return "SHORT"
+    if "long" in n:
+        return "LONG"
+    return None
+
+
 def load_queue():
     items = []
     try:
@@ -110,6 +135,13 @@ def load_queue():
             if gagal is None:
                 continue
             siap_pada = gagal + timedelta(hours=23)
+            # Tipe + durasi: ffprobe dulu, fallback tebak dari nama file
+            vp = d.get("video_path", "") or ""
+            tipe, dur = (None, None)
+            if vp and os.path.isfile(vp):
+                tipe, dur = probe_video(vp)
+            if not tipe:
+                tipe = tebak_tipe_dari_nama(os.path.basename(vp))
             items.append({
                 "channel": d.get("channel", "?"),
                 "slot": d.get("slot_target", "-"),
@@ -117,6 +149,8 @@ def load_queue():
                 "siap_pada": siap_pada,
                 "sebab": d.get("sebab", "-"),
                 "file": os.path.basename(f),
+                "tipe": tipe or "-",
+                "durasi": dur or "-",
             })
         except Exception:
             continue
@@ -133,12 +167,15 @@ def load_history():
             out = []
             for e in data:
                 if isinstance(e, dict):
+                    judul = e.get("judul", "-")
                     out.append({
-                        "judul": e.get("judul", "-"),
+                        "judul": judul,
                         "channel": e.get("channel", "-"),
                         "status": str(e.get("status", "ANTRE")).upper(),
                         "tanggal": e.get("tanggal", "-"),
                         "url": e.get("url", "") or "",
+                        "tipe": e.get("tipe") or tebak_tipe_dari_nama(judul) or "-",
+                        "durasi": e.get("durasi") or "-",
                     })
             return out
     except Exception:
@@ -217,6 +254,18 @@ def load_blog():
     return posted, gagal, sumber
 
 
+def badge_tipe(tipe, durasi):
+    """Badge SHORT/LONG + durasi. Kembalikan string kosong bila tak diketahui."""
+    if tipe == "SHORT":
+        cls = "tipe-short"
+    elif tipe == "LONG":
+        cls = "tipe-long"
+    else:
+        return ""
+    label = f"{tipe} • {durasi}" if durasi and durasi != "-" else tipe
+    return f'<span class="badge {cls}">{esc(label)}</span>'
+
+
 def fmt_countdown(delta):
     if delta.total_seconds() <= 0:
         return "sekarang"
@@ -267,7 +316,8 @@ def section_history(history):
             cards.append(
                 f'<div class="item">'
                 f'<div class="item-head"><b>{esc(e["judul"])}</b>'
-                f'<span class="badge {cls}">{esc(e["status"])}</span></div>'
+                f'<span class="badges">{badge_tipe(e["tipe"], e["durasi"])}'
+                f'<span class="badge {cls}">{esc(e["status"])}</span></span></div>'
                 f'<div class="meta">{esc(e["channel"])} &nbsp;•&nbsp; {esc(e["tanggal"])}</div>'
                 f'{link}</div>'
             )
@@ -296,7 +346,8 @@ def section_queue(queue, now):
                 aksi = ""
             cards.append(
                 f'<div class="item">'
-                f'<div class="item-head"><b>{esc(q["channel"])}</b>{badge}</div>'
+                f'<div class="item-head"><b>{esc(q["channel"])}</b>'
+                f'<span class="badges">{badge_tipe(q["tipe"], q["durasi"])}{badge}</span></div>'
                 f'<dl class="kv">'
                 f'<div><dt>Slot target</dt><dd>{esc(q["slot"])}</dd></div>'
                 f'<div><dt>Gagal</dt><dd>{q["gagal_pada"].strftime("%d %b %H:%M")}</dd></div>'
@@ -399,6 +450,9 @@ section h2 {{ font-size: 1.05rem; border-bottom: 2px solid #30363d; padding-bott
 .badge.st-tayang {{ background: #1a4d2e; color: #3fb950; }}
 .badge.st-terjadwal {{ background: #1a3a4d; color: #58a6ff; }}
 .badge.st-antre {{ background: #4d3a1a; color: #f0a832; }}
+.badge.tipe-short {{ background: #1a3a4d; color: #58a6ff; }}
+.badge.tipe-long {{ background: #3a1a4d; color: #d2a8ff; }}
+.badges {{ display: inline-flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }}
 .badge small {{ font-weight: 400; }}
 .copybtn {{ display: block; width: 100%; margin-top: 10px; padding: 13px;
   font-size: 1rem; font-weight: 700; border: none; border-radius: 10px;
