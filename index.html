@@ -8,84 +8,115 @@
 <style>
 :root { color-scheme: dark light; }
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
 body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0;
-  padding: 12px; background: #0f1419; color: #e6edf3; }
+  padding: 12px; background: #0f1419; color: #e6edf3; font-size: 16px; line-height: 1.45; }
 @media (prefers-color-scheme: light) {
   body { background: #f6f8fa; color: #1f2328; }
-  .card { background: #fff; border-color: #d0d7de; }
-  table { background: #fff; }
-  th { background: #f0f3f6 !important; color: #1f2328 !important; }
-  td { border-color: #e5e9ec !important; color: #1f2328; }
-  .sebab { color: #57606a !important; }
-  .src, footer { color: #57606a !important; }
-  .titles li { color: #1f2328; }
+  .card, .item { background: #fff !important; border-color: #d0d7de !important; }
+  .sebab, .src, .meta, footer, header .ts, .hint { color: #57606a !important; }
+  .titles li, .kv dd { color: #1f2328; }
+  .kv dt { color: #57606a; }
+  .linkbtn { background: #1f6feb; }
 }
 header { text-align: center; margin-bottom: 14px; }
-header h1 { margin: 6px 0; font-size: 1.4rem; }
+header h1 { margin: 6px 0; font-size: 1.35rem; }
 header .ts { color: #8b949e; font-size: .85rem; }
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
 .card { background: #161b22; border: 1px solid #30363d; border-radius: 10px;
-  padding: 12px; text-align: center; }
-.card .num { font-size: 1.8rem; font-weight: 700; }
-.card .lbl { font-size: .78rem; color: #8b949e; margin-top: 4px; }
-.card .num.warn { color: #f0a832; } .card .num.bad { color: #f47067; } .card .num.good { color: #3fb950; }
-section { margin-bottom: 20px; }
-section h2 { font-size: 1.05rem; border-bottom: 2px solid #30363d; padding-bottom: 6px; }
-.tblwrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: .82rem; background: #161b22; }
-th, td { padding: 8px 6px; border-bottom: 1px solid #30363d; text-align: left; vertical-align: top; }
-th { background: #1c2330; white-space: nowrap; }
-.num { text-align: center; font-weight: 700; font-size: 1.1rem; }
-.ok-t { color: #3fb950; } .bad-t { color: #f47067; }
-.sebab { color: #9aa4b2; font-size: .76rem; max-width: 260px; }
-.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: .72rem; font-weight: 700; }
+  padding: 12px 6px; text-align: center; }
+.card .num { font-size: 1.7rem; font-weight: 700; }
+.card .lbl { font-size: .75rem; color: #8b949e; margin-top: 4px; }
+.num.warn { color: #f0a832; } .num.bad { color: #f47067; } .num.good { color: #3fb950; }
+section { margin-bottom: 22px; }
+section h2 { font-size: 1.05rem; border-bottom: 2px solid #30363d; padding-bottom: 6px; margin-bottom: 10px; }
+.grid { display: grid; gap: 10px; grid-template-columns: 1fr; }
+.item { background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+  padding: 12px; overflow-wrap: anywhere; }
+.item.fail { border-color: #7a2e2e; }
+.item-head { display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 8px; margin-bottom: 6px; font-size: .95rem; }
+.item-head b { flex: 1; }
+.handle { color: #8b949e; font-size: .8rem; white-space: nowrap; }
+.meta { color: #9aa4b2; font-size: .82rem; margin-bottom: 2px; }
+.kv { margin: 8px 0 0; display: grid; gap: 6px; }
+.kv > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
+.kv dt { color: #8b949e; font-size: .78rem; }
+.kv dd { margin: 0; font-size: .85rem; }
+.sebab { color: #9aa4b2; font-size: .8rem; }
+.src { color: #8b949e; font-size: .75rem; margin: 0 0 8px; }
+.titles { margin: 6px 0 0; padding-left: 18px; font-size: .85rem; }
+.titles li { margin-bottom: 3px; }
+.badge { display: inline-block; padding: 4px 12px; border-radius: 20px;
+  font-size: .72rem; font-weight: 700; white-space: nowrap; text-align: center; }
 .badge.ok { background: #1a4d2e; color: #3fb950; }
-.badge.wait { background: #4d3a1a; color: #f0a832; line-height: 1.3; }
+.badge.wait { background: #4d3a1a; color: #f0a832; line-height: 1.35; }
+.badge.bad { background: #4d1a1a; color: #f47067; }
+.badge.st-tayang { background: #1a4d2e; color: #3fb950; }
+.badge.st-terjadwal { background: #1a3a4d; color: #58a6ff; }
+.badge.st-antre { background: #4d3a1a; color: #f0a832; }
 .badge small { font-weight: 400; }
-.titles { margin: 0; padding-left: 16px; font-size: .78rem; }
-.titles li { margin-bottom: 2px; }
-.failrow td { background: rgba(244,112,103,.06); }
+.copybtn { display: block; width: 100%; margin-top: 10px; padding: 13px;
+  font-size: 1rem; font-weight: 700; border: none; border-radius: 10px;
+  background: #1f6feb; color: #fff; cursor: pointer; min-height: 48px; }
+.copybtn:active { background: #388bfd; }
+.hint { text-align: center; color: #8b949e; font-size: .75rem; margin-top: 5px; }
+.linkbtn { display: inline-block; margin-top: 8px; padding: 10px 18px; min-height: 44px;
+  background: #238636; color: #fff !important; border-radius: 10px;
+  text-decoration: none; font-weight: 700; font-size: .9rem; }
 .empty { color: #8b949e; font-style: italic; }
-.src { color: #8b949e; font-size: .75rem; margin: 0 0 6px; }
-.jam { white-space: nowrap; }
-footer { text-align: center; color: #8b949e; font-size: .75rem; margin-top: 18px;
+footer { text-align: center; color: #8b949e; font-size: .78rem; margin-top: 18px;
   border-top: 1px solid #30363d; padding-top: 10px; }
-@media (max-width: 560px) { .cards { grid-template-columns: 1fr 1fr 1fr; gap: 6px; } .card .num { font-size: 1.4rem; } }
+/* Layar lebar: kartu jadi grid multi-kolom (TIDAK ada tabel di mana pun) */
+@media (min-width: 900px) {
+  body { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  section .grid { grid-template-columns: repeat(2, 1fr); }
+  section:nth-of-type(2) .grid { grid-template-columns: repeat(3, 1fr); }
+}
 </style>
 </head>
 <body>
 <header>
 <h1>📊 Monitor Project Yunobi</h1>
-<div class="ts">Update terakhir: 09 Oct 2026 00:44 WIB &nbsp;•&nbsp; refresh otomatis 30 mnt</div>
+<div class="ts">Update terakhir: 09 Oct 2026 00:56 WIB &nbsp;•&nbsp; refresh otomatis 30 mnt</div>
 </header>
 
+
 <div class="cards">
-  <div class="card"><div class="num warn">19</div><div class="lbl">video antre<br>(1 siap dicoba)</div></div>
-  <div class="card"><div class="num good">0</div><div class="lbl">artikel tayang<br>hari ini</div></div>
-  <div class="card"><div class="num bad">0</div><div class="lbl">blog gagal<br>hari ini</div></div>
+  <div class="card"><div class="num warn">19</div><div class="lbl">video antre</div></div>
+  <div class="card"><div class="num good">1</div><div class="lbl">siap dicoba</div></div>
+  <div class="card"><div class="num good">7</div><div class="lbl">tayang/<br>terjadwal</div></div>
+  <div class="card"><div class="num good">6</div><div class="lbl">artikel blog<br>hari ini</div></div>
 </div>
+<section><h2>🗓️ Jadwal Produksi (18 Channel)</h2><div class="grid"><div class="item compact"><div class="item-head"><b>Kisah Horor</b><span class="handle">@KisahPOV</span></div><div class="meta">horor ID, voice Mudiwa</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; long/shorts bergantian</div></div><div class="item compact"><div class="item-head"><b>Cerita Rakyat (POV Sejarah)</b><span class="handle">@ceritarakyat862</span></div><div class="meta">sejarah ID, voice Mudiwa</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; long/shorts bergantian</div></div><div class="item compact"><div class="item-head"><b>Lima Misteri</b><span class="handle">@LimaMisteri</span></div><div class="meta">countdown misteri ID, voice Mudiwa</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; long/shorts bergantian</div></div><div class="item compact"><div class="item-head"><b>Kisah Dharma</b><span class="handle">@KisahDharma</span></div><div class="meta">Hindu, footage Pexels</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; long/shorts bergantian</div></div><div class="item compact"><div class="item-head"><b>Jejak Islami</b><span class="handle">@JejakIslami-h3d</span></div><div class="meta">Islam, footage Pexels</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; long/shorts bergantian</div></div><div class="item compact"><div class="item-head"><b>Kisah Alkitab</b><span class="handle">@KisahAlkitab-k9j</span></div><div class="meta">Kristen, footage Pexels</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; long/shorts bergantian</div></div><div class="item compact"><div class="item-head"><b>Jejak Buddha</b><span class="handle">@JejakBuddha</span></div><div class="meta">Buddha, footage Pexels</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; long/shorts bergantian</div></div><div class="item compact"><div class="item-head"><b>Tiny Builders</b><span class="handle">@tinybuilders-d5z</span></div><div class="meta">miniatur AI (satu-satunya full-AI)</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; long/shorts bergantian</div></div><div class="item compact"><div class="item-head"><b>InkTime</b><span class="handle">@InkTime-d3t</span></div><div class="meta">explainer whiteboard EN</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; harian (mulai 9 Okt)</div></div><div class="item compact"><div class="item-head"><b>Strange Tales</b><span class="handle">@StrangeTales-g6n</span></div><div class="meta">shorts EN, voice Miles, target USA</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; 3 shorts/hari (21:00/03:00/07:00)</div></div><div class="item compact"><div class="item-head"><b>Ancient Empires</b><span class="handle">@AncientEmpiresTV</span></div><div class="meta">sejarah EN</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; harian</div></div><div class="item compact"><div class="item-head"><b>Echoes of the Past</b><span class="handle">@EchoesOfThePast-e9n</span></div><div class="meta">history EN</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; harian</div></div><div class="item compact"><div class="item-head"><b>Tales of Dread</b><span class="handle">@TalesOfDreadTV</span></div><div class="meta">horror EN</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; harian</div></div><div class="item compact"><div class="item-head"><b>The Dark Mind Files</b><span class="handle">@TheDarkMindFiles-s6n</span></div><div class="meta">psikologi/mind EN</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; harian</div></div><div class="item compact"><div class="item-head"><b>Mystery Shadows</b><span class="handle">@MysteryShadowsTV</span></div><div class="meta">misteri EN</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; harian</div></div><div class="item compact"><div class="item-head"><b>Cosmos Unknown</b><span class="handle">@CosmosUnknownTV</span></div><div class="meta">luar angkasa EN</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; harian</div></div><div class="item compact"><div class="item-head"><b>True Case Files</b><span class="handle">@TrueCaseFilesTV</span></div><div class="meta">true crime EN</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; harian</div></div><div class="item compact"><div class="item-head"><b>Bizarre World Daily</b><span class="handle">@BizarreWorldDaily</span></div><div class="meta">weird EN</div><div class="meta">🎬 Produksi 16:11 WIB &nbsp;•&nbsp; harian</div></div></div></section>
+<section><h2>📤 Riwayat Upload</h2><div class="grid"><div class="item"><div class="item-head"><b>Nabi Yusuf (long)</b><span class="badge st-tayang">TAYANG</span></div><div class="meta">JejakIslami &nbsp;•&nbsp; 9 Okt 19:00</div><a class="linkbtn" href="https://www.youtube.com/watch?v=8LdS1kmxEjg" target="_blank" rel="noopener">▶ Buka video</a></div><div class="item"><div class="item-head"><b>3 shorts Göbekli Tepe</b><span class="badge st-terjadwal">TERJADWAL</span></div><div class="meta">AncientEmpiresTV &nbsp;•&nbsp; 9 Okt 07:00</div></div><div class="item"><div class="item-head"><b>Setiap Kali Dia Foto, Sosok Itu Makin Dekat... Kutukan Candi Terlarang!</b><span class="badge st-terjadwal">TERJADWAL</span></div><div class="meta">Kisah Horor (@KisahPOV) &nbsp;•&nbsp; 9 Okt 19:00</div><a class="linkbtn" href="https://youtu.be/iSIaj3nG_vk" target="_blank" rel="noopener">▶ Buka video</a></div><div class="item"><div class="item-head"><b>3 shorts</b><span class="badge st-tayang">TAYANG</span></div><div class="meta">TrueCaseFiles &nbsp;•&nbsp; 8 Okt</div></div><div class="item"><div class="item-head"><b>3 shorts</b><span class="badge st-tayang">TAYANG</span></div><div class="meta">DarkMindFiles &nbsp;•&nbsp; 8 Okt</div></div><div class="item"><div class="item-head"><b>3 shorts</b><span class="badge st-tayang">TAYANG</span></div><div class="meta">CosmosUnknownTV &nbsp;•&nbsp; 8 Okt</div></div><div class="item"><div class="item-head"><b>1 video</b><span class="badge st-tayang">TAYANG</span></div><div class="meta">LimaMisteri &nbsp;•&nbsp; 8 Okt</div></div><div class="item"><div class="item-head"><b>Daud vs Goliat (long) — produksi jadi, kena limit</b><span class="badge st-antre">ANTRE</span></div><div class="meta">KisahAlkitab &nbsp;•&nbsp; -</div></div></div></section>
+<section><h2>🎬 Antrean Upload</h2><div class="grid"><div class="item"><div class="item-head"><b>mystery-en</b><span class="badge ok">SIAP</span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-09 07:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 01:08</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 00:08</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai (percobaan ulang 2026-10-08 dini hari)</dd></div></dl><button class="copybtn" data-cmd="upload ulang: mystery-en-2026-10-07.json" onclick="salinPerintah(this)">📋 Salin perintah</button><div class="hint">tempel di chat WhatsApp</div></div><div class="item"><div class="item-head"><b>tinybuilders</b><span class="badge wait">MENUNGGU<br><small>~12 jam 36 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>PUBLIC langsung</dd></div><div><dt>Gagal</dt><dd>08 Oct 14:33</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 13:33</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</dd></div></dl></div><div class="item"><div class="item-head"><b>tinybuilders</b><span class="badge wait">MENUNGGU<br><small>~12 jam 36 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-09 21:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 14:33</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 13:33</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</dd></div></dl></div><div class="item"><div class="item-head"><b>tinybuilders</b><span class="badge wait">MENUNGGU<br><small>~12 jam 36 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-10 03:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 14:33</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 13:33</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</dd></div></dl></div><div class="item"><div class="item-head"><b>tinybuilders</b><span class="badge wait">MENUNGGU<br><small>~12 jam 36 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-10 07:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 14:33</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 13:33</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</dd></div></dl></div><div class="item"><div class="item-head"><b>tinybuilders</b><span class="badge wait">MENUNGGU<br><small>~14 jam 29 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-11 07:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 16:26</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 15:26</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian (channel baru) — percobaan browser dilewati: batas dipastikan masih aktif sampai ~14:33 2026-10-09 (gagal terverifikasi 2026-10-08 14:33 WIB</dd></div></dl></div><div class="item"><div class="item-head"><b>tinybuilders</b><span class="badge wait">MENUNGGU<br><small>~14 jam 29 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-11 03:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 16:26</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 15:26</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian (channel baru) — percobaan browser dilewati: batas dipastikan masih aktif sampai ~14:33 2026-10-09 (gagal terverifikasi 2026-10-08 14:33 WIB</dd></div></dl></div><div class="item"><div class="item-head"><b>tinybuilders</b><span class="badge wait">MENUNGGU<br><small>~14 jam 29 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-10 21:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 16:26</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 15:26</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian (channel baru) — percobaan browser dilewati: batas dipastikan masih aktif sampai ~14:33 2026-10-09 (gagal terverifikasi 2026-10-08 14:33 WIB</dd></div></dl></div><div class="item"><div class="item-head"><b>limamisteri</b><span class="badge wait">MENUNGGU<br><small>~14 jam 39 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-09 19:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 16:36</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 15:36</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai (s2 gamelan misterius; s1 La Llorona lolos dijadwalkan 9 Okt 17:00 WIB)</dd></div></dl></div><div class="item"><div class="item-head"><b>limamisteri</b><span class="badge wait">MENUNGGU<br><small>~14 jam 39 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-09 21:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 16:36</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 15:36</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai (s3 pocong CCTV; s1 La Llorona lolos dijadwalkan 9 Okt 17:00 WIB)</dd></div></dl></div><div class="item"><div class="item-head"><b>history-en</b><span class="badge wait">MENUNGGU<br><small>~15 jam 0 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-09 07:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 16:57</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 15:57</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai (Daily upload limit reached) — channel Echoes of History Channel (@EchoesOfThePast-e9m); video tidak pernah terbuat di server</dd></div></dl></div><div class="item"><div class="item-head"><b>strangetales</b><span class="badge wait">MENUNGGU<br><small>~15 jam 0 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-10 03:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 16:57</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 15:57</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai</dd></div></dl></div><div class="item"><div class="item-head"><b>strangetales</b><span class="badge wait">MENUNGGU<br><small>~15 jam 0 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-09 21:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 16:57</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 15:57</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai</dd></div></dl></div><div class="item"><div class="item-head"><b>strangetales</b><span class="badge wait">MENUNGGU<br><small>~15 jam 0 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-10 07:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 16:57</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 15:57</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai</dd></div></dl></div><div class="item"><div class="item-head"><b>weird-en</b><span class="badge wait">MENUNGGU<br><small>~18 jam 43 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-09 07:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 20:40</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 19:40</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai</dd></div></dl></div><div class="item"><div class="item-head"><b>jejak-buddha</b><span class="badge wait">MENUNGGU<br><small>~18 jam 53 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-09 19:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 20:50</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 19:50</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai (verbatim YouTube: Upload lebih banyak video setiap hari setelah verifikasi satu kali atau tunggu 24 jam). Channel terkonfirm</dd></div></dl></div><div class="item"><div class="item-head"><b>kisah-alkitab</b><span class="badge wait">MENUNGGU<br><small>~19 jam 33 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-09 19:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 21:30</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 20:30</dd></div><div><dt>Sebab</dt><dd class="sebab">TERKONFIRMASI dari 4 sesi browser: YouTube Studio menampilkan &quot;Batas upload harian telah tercapai. Upload lebih banyak video setiap hari setelah verifikasi satu</dd></div></dl></div><div class="item"><div class="item-head"><b>horror-en</b><span class="badge wait">MENUNGGU<br><small>~20 jam 7 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-09 07:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 22:04</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 21:04</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai</dd></div></dl></div><div class="item"><div class="item-head"><b>kisahdharma</b><span class="badge wait">MENUNGGU<br><small>~20 jam 48 mnt lagi</small></span></div><dl class="kv"><div><dt>Slot target</dt><dd>2026-10-09 19:00 WIB</dd></div><div><dt>Gagal</dt><dd>08 Oct 22:45</dd></div><div><dt>Bisa dicoba</dt><dd>09 Oct 21:45</dd></div><div><dt>Sebab</dt><dd class="sebab">Batas upload harian telah tercapai (YouTube: &#x27;Upload lebih banyak video setiap hari setelah verifikasi satu kali atau tunggu 24 jam&#x27;)</dd></div></dl></div></div></section>
+<section><h2>📰 Blog Hari Ini</h2><p class="src">Sumber: memory/2026-10-08.md</p><div class="grid"><div class="item"><div class="item-head"><b>KabarViral</b><span class="badge ok">3 tayang</span></div><ul class="titles"><li>Bea Cukai Jember Gagalkan 1,3 Juta Batang Rokok Ilegal</li><li>Hector Souto Puji Kerendahan Hati John Herdman</li><li>Teknologi Telematika Kurangi Risiko Pengereman Mendadak</li></ul></div><div class="item"><div class="item-head"><b>OtomotifInfo</b><span class="badge ok">1 tayang</span></div><ul class="titles"><li>Tips Pilih Pelumas Motor Trail 2 Tak Agar Mesin Awet</li></ul></div><div class="item"><div class="item-head"><b>PendidikanCerdas</b><span class="badge ok">1 tayang</span></div><ul class="titles"><li>Kabar Baik: Layanan Kesehatan Mental Kini Jadi Hak Mahasiswa</li></ul></div><div class="item"><div class="item-head"><b>TEKNO PEDIA</b><span class="badge ok">1 tayang</span></div><ul class="titles"><li>Startup Anjlok 94,8%, Telkomsel Dorong Inovasi AI</li></ul></div><div class="item fail"><div class="item-head"><b>Info Kesehatan</b><span class="badge bad">GAGAL</span></div><div class="sebab">budget 24 habis; nemotron-3.5-lightning:free konsisten &quot;tidak ada JSON&quot;</div></div><div class="item fail"><div class="item-head"><b>Ekonomi Bisnis</b><span class="badge bad">GAGAL</span></div><div class="sebab">budget 24 habis; nemotron-3.5-lightning:free konsisten &quot;tidak ada JSON&quot;</div></div></div></section>
 
-<section>
-<h2>🎬 Antrean YouTube</h2>
-<div class="tblwrap"><table><thead><tr><th>Channel</th><th>Slot target</th><th>Gagal</th><th>Bisa dicoba</th><th>Status</th><th>Sebab</th></tr></thead><tbody><tr><td><b>mystery-en</b></td><td>2026-10-09 07:00 WIB</td><td>08 Oct 01:08</td><td>09 Oct 00:08</td><td><span class="badge ok">SIAP</span></td><td class='sebab'>Batas upload harian telah tercapai (percobaan ulang 2026-10-08 dini hari)</td></tr><tr><td><b>tinybuilders</b></td><td>PUBLIC langsung</td><td>08 Oct 14:33</td><td>09 Oct 13:33</td><td><span class="badge wait">MENUNGGU<br><small>~12 jam 49 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-09 21:00 WIB</td><td>08 Oct 14:33</td><td>09 Oct 13:33</td><td><span class="badge wait">MENUNGGU<br><small>~12 jam 49 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-10 03:00 WIB</td><td>08 Oct 14:33</td><td>09 Oct 13:33</td><td><span class="badge wait">MENUNGGU<br><small>~12 jam 49 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-10 07:00 WIB</td><td>08 Oct 14:33</td><td>09 Oct 13:33</td><td><span class="badge wait">MENUNGGU<br><small>~12 jam 49 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-11 07:00 WIB</td><td>08 Oct 16:26</td><td>09 Oct 15:26</td><td><span class="badge wait">MENUNGGU<br><small>~14 jam 41 mnt</small></span></td><td class='sebab'>Batas upload harian (channel baru) — percobaan browser dilewati: batas dipastikan masih aktif sampai ~14:33 2026-10-09 (gagal terverifikasi </td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-11 03:00 WIB</td><td>08 Oct 16:26</td><td>09 Oct 15:26</td><td><span class="badge wait">MENUNGGU<br><small>~14 jam 41 mnt</small></span></td><td class='sebab'>Batas upload harian (channel baru) — percobaan browser dilewati: batas dipastikan masih aktif sampai ~14:33 2026-10-09 (gagal terverifikasi </td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-10 21:00 WIB</td><td>08 Oct 16:26</td><td>09 Oct 15:26</td><td><span class="badge wait">MENUNGGU<br><small>~14 jam 41 mnt</small></span></td><td class='sebab'>Batas upload harian (channel baru) — percobaan browser dilewati: batas dipastikan masih aktif sampai ~14:33 2026-10-09 (gagal terverifikasi </td></tr><tr><td><b>limamisteri</b></td><td>2026-10-09 19:00 WIB</td><td>08 Oct 16:36</td><td>09 Oct 15:36</td><td><span class="badge wait">MENUNGGU<br><small>~14 jam 51 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (s2 gamelan misterius; s1 La Llorona lolos dijadwalkan 9 Okt 17:00 WIB)</td></tr><tr><td><b>limamisteri</b></td><td>2026-10-09 21:00 WIB</td><td>08 Oct 16:36</td><td>09 Oct 15:36</td><td><span class="badge wait">MENUNGGU<br><small>~14 jam 51 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (s3 pocong CCTV; s1 La Llorona lolos dijadwalkan 9 Okt 17:00 WIB)</td></tr><tr><td><b>history-en</b></td><td>2026-10-09 07:00 WIB</td><td>08 Oct 16:57</td><td>09 Oct 15:57</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 12 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (Daily upload limit reached) — channel Echoes of History Channel (@EchoesOfThePast-e9m); video tidak pern</td></tr><tr><td><b>strangetales</b></td><td>2026-10-10 03:00 WIB</td><td>08 Oct 16:57</td><td>09 Oct 15:57</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 12 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai</td></tr><tr><td><b>strangetales</b></td><td>2026-10-09 21:00 WIB</td><td>08 Oct 16:57</td><td>09 Oct 15:57</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 12 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai</td></tr><tr><td><b>strangetales</b></td><td>2026-10-10 07:00 WIB</td><td>08 Oct 16:57</td><td>09 Oct 15:57</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 12 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai</td></tr><tr><td><b>weird-en</b></td><td>2026-10-09 07:00 WIB</td><td>08 Oct 20:40</td><td>09 Oct 19:40</td><td><span class="badge wait">MENUNGGU<br><small>~18 jam 55 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai</td></tr><tr><td><b>jejak-buddha</b></td><td>2026-10-09 19:00 WIB</td><td>08 Oct 20:50</td><td>09 Oct 19:50</td><td><span class="badge wait">MENUNGGU<br><small>~19 jam 5 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (verbatim YouTube: Upload lebih banyak video setiap hari setelah verifikasi satu kali atau tunggu 24 jam)</td></tr><tr><td><b>kisah-alkitab</b></td><td>2026-10-09 19:00 WIB</td><td>08 Oct 21:30</td><td>09 Oct 20:30</td><td><span class="badge wait">MENUNGGU<br><small>~19 jam 45 mnt</small></span></td><td class='sebab'>TERKONFIRMASI dari 4 sesi browser: YouTube Studio menampilkan &quot;Batas upload harian telah tercapai. Upload lebih banyak video setiap hari set</td></tr><tr><td><b>horror-en</b></td><td>2026-10-09 07:00 WIB</td><td>08 Oct 22:04</td><td>09 Oct 21:04</td><td><span class="badge wait">MENUNGGU<br><small>~20 jam 19 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai</td></tr><tr><td><b>kisahdharma</b></td><td>2026-10-09 19:00 WIB</td><td>08 Oct 22:45</td><td>09 Oct 21:45</td><td><span class="badge wait">MENUNGGU<br><small>~21 jam 0 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (YouTube: &#x27;Upload lebih banyak video setiap hari setelah verifikasi satu kali atau tunggu 24 jam&#x27;)</td></tr></tbody></table></div>
-</section>
+<footer>Waktu update: 09 Oct 2026 00:56 WIB<br>Data dari mesin otomasi — bukan live YouTube.</footer>
 
-<section>
-<h2>📰 Blog Hari Ini</h2>
-<p class="empty">Data blog hari ini tidak tersedia.</p>
-</section>
-
-<section>
-<h2>📤 Status Video Terakhir</h2>
-<div class="tblwrap"><table><thead><tr><th>Channel</th><th>Status terakhir</th></tr></thead><tbody><tr><td><b>youtube-otomatis</b></td><td>shorts:2026-10-07</td></tr><tr><td><b>horor-otomatis</b></td><td>long:2026-10-08</td></tr><tr><td><b>lima-misteri</b></td><td>shorts:2026-10-07</td></tr><tr><td><b>kisah-islami</b></td><td>long:2026-10-08</td></tr><tr><td><b>kisah-alkitab</b></td><td>long:2026-10-08</td></tr><tr><td><b>kisah-dharma</b></td><td>long:2026-10-08</td></tr><tr><td><b>jejak-buddha</b></td><td>long:2026-10-08</td></tr></tbody></table></div>
-</section>
-
-<section>
-<h2>🗓️ Jadwal</h2>
-<div class="tblwrap"><table><thead><tr><th>Jam</th><th>Agenda</th><th>Keterangan</th></tr></thead><tbody><tr><td class='jam'><b>10:11</b></td><td><b>TikTok FYP harian</b></td><td>Konten hiburan @ngeweb.yuk via Taisly (otomatis)</td></tr><tr><td class='jam'><b>13:11</b></td><td><b>Trend radar YouTube</b></td><td>Riset demand per 10 niche (silent jika sukses)</td></tr><tr><td class='jam'><b>15:11</b></td><td><b>Blog otomatis harian</b></td><td>Pipeline 6 artikel/hari → posting via web UI</td></tr><tr><td class='jam'><b>16:11</b></td><td><b>18 channel YouTube</b></td><td>Produksi + upload video harian tiap channel</td></tr><tr><td class='jam'><b>17:11</b></td><td><b>Promo afiliasi harian</b></td><td>5 produk → 4 akun (butuh persetujuan)</td></tr><tr><td class='jam'><b>17:11</b></td><td><b>Verifikasi pagi blog</b></td><td>Cek artikel via feed publik + bounce Gmail</td></tr><tr><td class='jam'><b>19:11</b></td><td><b>Paket video Shopee</b></td><td>5 video + caption + link (upload manual)</td></tr><tr><td class='jam'><b>20:00</b></td><td><b>Watchdog retry upload</b></td><td>Eksekusi antrean umur ≥23 jam via browser</td></tr><tr><td class='jam'><b>20:11</b></td><td><b>Share IG harian</b></td><td>IG reel → FB → Threads (butuh persetujuan)</td></tr><tr><td class='jam'><b>21:11</b></td><td><b>Balas komentar (malam)</b></td><td>Cek 12 channel, balas + seed diskusi</td></tr><tr><td class='jam'><b>Senin 09:00</b></td><td><b>Refresh SEO mingguan</b></td><td>Update metadata via yt-growth</td></tr></tbody></table></div>
-</section>
-
-<footer>Data dari mesin otomasi — bukan live YouTube.<br>
-Jalankan <code>python3 dashboard.py</code> untuk memperbarui.</footer>
+<script>
+function salinPerintah(btn) {
+  var t = btn.getAttribute('data-cmd');
+  var label = btn.innerHTML;
+  function ok() {
+    btn.innerHTML = '✅ Tersalin!';
+    setTimeout(function() { btn.innerHTML = label; }, 2000);
+  }
+  function fallback() {
+    var ta = document.createElement('textarea');
+    ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); ok(); }
+    catch (e) { btn.innerHTML = '❌ Gagal menyalin'; }
+    document.body.removeChild(ta);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(ok, fallback);
+  } else {
+    fallback();
+  }
+}
+</script>
 </body>
 </html>
