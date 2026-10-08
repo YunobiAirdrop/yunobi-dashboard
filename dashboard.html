@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="1800">
+<title>Monitor Project Yunobi</title>
+<style>
+:root { color-scheme: dark light; }
+* { box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0;
+  padding: 12px; background: #0f1419; color: #e6edf3; }
+@media (prefers-color-scheme: light) {
+  body { background: #f6f8fa; color: #1f2328; }
+  .card { background: #fff; border-color: #d0d7de; }
+  table { background: #fff; }
+  th { background: #f0f3f6 !important; color: #1f2328 !important; }
+  td { border-color: #e5e9ec !important; color: #1f2328; }
+  .sebab { color: #57606a !important; }
+  .src, footer { color: #57606a !important; }
+  .titles li { color: #1f2328; }
+}
+header { text-align: center; margin-bottom: 14px; }
+header h1 { margin: 6px 0; font-size: 1.4rem; }
+header .ts { color: #8b949e; font-size: .85rem; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+  padding: 12px; text-align: center; }
+.card .num { font-size: 1.8rem; font-weight: 700; }
+.card .lbl { font-size: .78rem; color: #8b949e; margin-top: 4px; }
+.card .num.warn { color: #f0a832; } .card .num.bad { color: #f47067; } .card .num.good { color: #3fb950; }
+section { margin-bottom: 20px; }
+section h2 { font-size: 1.05rem; border-bottom: 2px solid #30363d; padding-bottom: 6px; }
+.tblwrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .82rem; background: #161b22; }
+th, td { padding: 8px 6px; border-bottom: 1px solid #30363d; text-align: left; vertical-align: top; }
+th { background: #1c2330; white-space: nowrap; }
+.num { text-align: center; font-weight: 700; font-size: 1.1rem; }
+.ok-t { color: #3fb950; } .bad-t { color: #f47067; }
+.sebab { color: #9aa4b2; font-size: .76rem; max-width: 260px; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: .72rem; font-weight: 700; }
+.badge.ok { background: #1a4d2e; color: #3fb950; }
+.badge.wait { background: #4d3a1a; color: #f0a832; line-height: 1.3; }
+.badge small { font-weight: 400; }
+.titles { margin: 0; padding-left: 16px; font-size: .78rem; }
+.titles li { margin-bottom: 2px; }
+.failrow td { background: rgba(244,112,103,.06); }
+.empty { color: #8b949e; font-style: italic; }
+.src { color: #8b949e; font-size: .75rem; margin: 0 0 6px; }
+.jam { white-space: nowrap; }
+footer { text-align: center; color: #8b949e; font-size: .75rem; margin-top: 18px;
+  border-top: 1px solid #30363d; padding-top: 10px; }
+@media (max-width: 560px) { .cards { grid-template-columns: 1fr 1fr 1fr; gap: 6px; } .card .num { font-size: 1.4rem; } }
+</style>
+</head>
+<body>
+<header>
+<h1>📊 Monitor Project Yunobi</h1>
+<div class="ts">Update terakhir: 09 Oct 2026 00:02 WIB &nbsp;•&nbsp; refresh otomatis 30 mnt</div>
+</header>
+
+<div class="cards">
+  <div class="card"><div class="num warn">19</div><div class="lbl">video antre<br>(0 siap dicoba)</div></div>
+  <div class="card"><div class="num good">6</div><div class="lbl">artikel tayang<br>hari ini</div></div>
+  <div class="card"><div class="num bad">0</div><div class="lbl">blog gagal<br>hari ini</div></div>
+</div>
+
+<section>
+<h2>🎬 Antrean YouTube</h2>
+<div class="tblwrap"><table><thead><tr><th>Channel</th><th>Slot target</th><th>Gagal</th><th>Bisa dicoba</th><th>Status</th><th>Sebab</th></tr></thead><tbody><tr><td><b>mystery-en</b></td><td>2026-10-09 07:00 WIB</td><td>08 Oct 01:08</td><td>09 Oct 00:08</td><td><span class="badge wait">MENUNGGU<br><small>~6 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (percobaan ulang 2026-10-08 dini hari)</td></tr><tr><td><b>tinybuilders</b></td><td>PUBLIC langsung</td><td>08 Oct 14:33</td><td>09 Oct 13:33</td><td><span class="badge wait">MENUNGGU<br><small>~13 jam 31 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-09 21:00 WIB</td><td>08 Oct 14:33</td><td>09 Oct 13:33</td><td><span class="badge wait">MENUNGGU<br><small>~13 jam 31 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-10 03:00 WIB</td><td>08 Oct 14:33</td><td>09 Oct 13:33</td><td><span class="badge wait">MENUNGGU<br><small>~13 jam 31 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-10 07:00 WIB</td><td>08 Oct 14:33</td><td>09 Oct 13:33</td><td><span class="badge wait">MENUNGGU<br><small>~13 jam 31 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (channel baru; 24 jam pertama sudah lewat ~14:21 WIB tapi batas belum dicabut)</td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-11 07:00 WIB</td><td>08 Oct 16:26</td><td>09 Oct 15:26</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 23 mnt</small></span></td><td class='sebab'>Batas upload harian (channel baru) — percobaan browser dilewati: batas dipastikan masih aktif sampai ~14:33 2026-10-09 (gagal terverifikasi </td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-11 03:00 WIB</td><td>08 Oct 16:26</td><td>09 Oct 15:26</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 23 mnt</small></span></td><td class='sebab'>Batas upload harian (channel baru) — percobaan browser dilewati: batas dipastikan masih aktif sampai ~14:33 2026-10-09 (gagal terverifikasi </td></tr><tr><td><b>tinybuilders</b></td><td>2026-10-10 21:00 WIB</td><td>08 Oct 16:26</td><td>09 Oct 15:26</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 23 mnt</small></span></td><td class='sebab'>Batas upload harian (channel baru) — percobaan browser dilewati: batas dipastikan masih aktif sampai ~14:33 2026-10-09 (gagal terverifikasi </td></tr><tr><td><b>limamisteri</b></td><td>2026-10-09 19:00 WIB</td><td>08 Oct 16:36</td><td>09 Oct 15:36</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 33 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (s2 gamelan misterius; s1 La Llorona lolos dijadwalkan 9 Okt 17:00 WIB)</td></tr><tr><td><b>limamisteri</b></td><td>2026-10-09 21:00 WIB</td><td>08 Oct 16:36</td><td>09 Oct 15:36</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 33 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (s3 pocong CCTV; s1 La Llorona lolos dijadwalkan 9 Okt 17:00 WIB)</td></tr><tr><td><b>history-en</b></td><td>2026-10-09 07:00 WIB</td><td>08 Oct 16:57</td><td>09 Oct 15:57</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 54 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (Daily upload limit reached) — channel Echoes of History Channel (@EchoesOfThePast-e9m); video tidak pern</td></tr><tr><td><b>strangetales</b></td><td>2026-10-10 03:00 WIB</td><td>08 Oct 16:57</td><td>09 Oct 15:57</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 54 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai</td></tr><tr><td><b>strangetales</b></td><td>2026-10-09 21:00 WIB</td><td>08 Oct 16:57</td><td>09 Oct 15:57</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 54 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai</td></tr><tr><td><b>strangetales</b></td><td>2026-10-10 07:00 WIB</td><td>08 Oct 16:57</td><td>09 Oct 15:57</td><td><span class="badge wait">MENUNGGU<br><small>~15 jam 54 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai</td></tr><tr><td><b>weird-en</b></td><td>2026-10-09 07:00 WIB</td><td>08 Oct 20:40</td><td>09 Oct 19:40</td><td><span class="badge wait">MENUNGGU<br><small>~19 jam 37 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai</td></tr><tr><td><b>jejak-buddha</b></td><td>2026-10-09 19:00 WIB</td><td>08 Oct 20:50</td><td>09 Oct 19:50</td><td><span class="badge wait">MENUNGGU<br><small>~19 jam 47 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (verbatim YouTube: Upload lebih banyak video setiap hari setelah verifikasi satu kali atau tunggu 24 jam)</td></tr><tr><td><b>kisah-alkitab</b></td><td>2026-10-09 19:00 WIB</td><td>08 Oct 21:30</td><td>09 Oct 20:30</td><td><span class="badge wait">MENUNGGU<br><small>~20 jam 27 mnt</small></span></td><td class='sebab'>TERKONFIRMASI dari 4 sesi browser: YouTube Studio menampilkan &quot;Batas upload harian telah tercapai. Upload lebih banyak video setiap hari set</td></tr><tr><td><b>horror-en</b></td><td>2026-10-09 07:00 WIB</td><td>08 Oct 22:04</td><td>09 Oct 21:04</td><td><span class="badge wait">MENUNGGU<br><small>~21 jam 1 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai</td></tr><tr><td><b>kisahdharma</b></td><td>2026-10-09 19:00 WIB</td><td>08 Oct 22:45</td><td>09 Oct 21:45</td><td><span class="badge wait">MENUNGGU<br><small>~21 jam 42 mnt</small></span></td><td class='sebab'>Batas upload harian telah tercapai (YouTube: &#x27;Upload lebih banyak video setiap hari setelah verifikasi satu kali atau tunggu 24 jam&#x27;)</td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>📰 Blog Hari Ini</h2>
+<p class="src">Sumber: memory/2026-10-08.md</p><div class="tblwrap"><table><thead><tr><th>Blog</th><th>Tayang</th><th>Judul / Keterangan</th></tr></thead><tbody><tr><td><b>KabarViral</b></td><td class='num ok-t'>3</td><td><ul class='titles'><li>Bea Cukai Jember Gagalkan 1,3 Juta Batang Rokok Ilegal</li><li>Hector Souto Puji Kerendahan Hati John Herdman</li><li>Teknologi Telematika Kurangi Risiko Pengereman Mendadak</li></ul></td></tr><tr><td><b>OtomotifInfo</b></td><td class='num ok-t'>1</td><td><ul class='titles'><li>Tips Pilih Pelumas Motor Trail 2 Tak Agar Mesin Awet</li></ul></td></tr><tr><td><b>PendidikanCerdas</b></td><td class='num ok-t'>1</td><td><ul class='titles'><li>Kabar Baik: Layanan Kesehatan Mental Kini Jadi Hak Mahasiswa</li></ul></td></tr><tr><td><b>TEKNO PEDIA</b></td><td class='num ok-t'>1</td><td><ul class='titles'><li>Startup Anjlok 94,8%, Telkomsel Dorong Inovasi AI</li></ul></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>📤 Status Video Terakhir</h2>
+<div class="tblwrap"><table><thead><tr><th>Channel</th><th>Status terakhir</th></tr></thead><tbody><tr><td><b>youtube-otomatis</b></td><td>shorts:2026-10-07</td></tr><tr><td><b>horor-otomatis</b></td><td>long:2026-10-08</td></tr><tr><td><b>lima-misteri</b></td><td>shorts:2026-10-07</td></tr><tr><td><b>kisah-islami</b></td><td>long:2026-10-08</td></tr><tr><td><b>kisah-alkitab</b></td><td>long:2026-10-08</td></tr><tr><td><b>kisah-dharma</b></td><td>long:2026-10-08</td></tr><tr><td><b>jejak-buddha</b></td><td>long:2026-10-08</td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>🗓️ Jadwal</h2>
+<div class="tblwrap"><table><thead><tr><th>Jam</th><th>Agenda</th><th>Keterangan</th></tr></thead><tbody><tr><td class='jam'><b>10:11</b></td><td><b>TikTok FYP harian</b></td><td>Konten hiburan @ngeweb.yuk via Taisly (otomatis)</td></tr><tr><td class='jam'><b>13:11</b></td><td><b>Trend radar YouTube</b></td><td>Riset demand per 10 niche (silent jika sukses)</td></tr><tr><td class='jam'><b>15:11</b></td><td><b>Blog otomatis harian</b></td><td>Pipeline 6 artikel/hari → posting via web UI</td></tr><tr><td class='jam'><b>16:11</b></td><td><b>18 channel YouTube</b></td><td>Produksi + upload video harian tiap channel</td></tr><tr><td class='jam'><b>17:11</b></td><td><b>Promo afiliasi harian</b></td><td>5 produk → 4 akun (butuh persetujuan)</td></tr><tr><td class='jam'><b>17:11</b></td><td><b>Verifikasi pagi blog</b></td><td>Cek artikel via feed publik + bounce Gmail</td></tr><tr><td class='jam'><b>19:11</b></td><td><b>Paket video Shopee</b></td><td>5 video + caption + link (upload manual)</td></tr><tr><td class='jam'><b>20:00</b></td><td><b>Watchdog retry upload</b></td><td>Eksekusi antrean umur ≥23 jam via browser</td></tr><tr><td class='jam'><b>20:11</b></td><td><b>Share IG harian</b></td><td>IG reel → FB → Threads (butuh persetujuan)</td></tr><tr><td class='jam'><b>21:11</b></td><td><b>Balas komentar (malam)</b></td><td>Cek 12 channel, balas + seed diskusi</td></tr><tr><td class='jam'><b>Senin 09:00</b></td><td><b>Refresh SEO mingguan</b></td><td>Update metadata via yt-growth</td></tr></tbody></table></div>
+</section>
+
+<footer>Data dari mesin otomasi — bukan live YouTube.<br>
+Jalankan <code>python3 dashboard.py</code> untuk memperbarui.</footer>
+</body>
+</html>
