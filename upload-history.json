@@ -1,1 +1,105 @@
-[{"channel":"JejakIslami","durasi":"10 mnt","judul":"Nabi Yusuf (long)","status":"TAYANG","tanggal":"9 Okt 19:00","tipe":"LONG","url":"https://www.youtube.com/watch?v=8LdS1kmxEjg"},{"channel":"AncientEmpiresTV","durasi":"-","judul":"3 shorts Göbekli Tepe","status":"TERJADWAL","tanggal":"9 Okt 07:00","tipe":"SHORT","url":""},{"channel":"Kisah Horor (@KisahPOV)","durasi":"-","judul":"Setiap Kali Dia Foto, Sosok Itu Makin Dekat... Kutukan Candi Terlarang!","status":"TERJADWAL","tanggal":"9 Okt 19:00","tipe":"LONG","url":"https://youtu.be/iSIaj3nG_vk"},{"channel":"TrueCaseFiles","durasi":"-","judul":"3 shorts","status":"TAYANG","tanggal":"8 Okt","tipe":"SHORT","url":""},{"channel":"DarkMindFiles","durasi":"-","judul":"3 shorts","status":"TAYANG","tanggal":"8 Okt","tipe":"SHORT","url":""},{"channel":"CosmosUnknownTV","durasi":"-","judul":"3 shorts","status":"TAYANG","tanggal":"8 Okt","tipe":"SHORT","url":""},{"channel":"LimaMisteri","durasi":"-","judul":"1 video","status":"TAYANG","tanggal":"8 Okt","tipe":"-","url":""},{"channel":"KisahAlkitab","durasi":"-","judul":"Daud vs Goliat (long) — produksi jadi, kena limit","status":"ANTRE","tanggal":"-","tipe":"LONG","url":""}]
+[
+ {
+  "channel": "JejakIslami",
+  "durasi": "10 mnt",
+  "judul": "Nabi Yusuf (long)",
+  "status": "TAYANG",
+  "tanggal": "9 Okt 19:00",
+  "tipe": "LONG",
+  "url": "https://www.youtube.com/watch?v=8LdS1kmxEjg"
+ },
+ {
+  "channel": "AncientEmpiresTV",
+  "durasi": "-",
+  "judul": "3 shorts Göbekli Tepe",
+  "status": "TERJADWAL",
+  "tanggal": "9 Okt 07:00",
+  "tipe": "SHORT",
+  "url": ""
+ },
+ {
+  "channel": "Kisah Horor (@KisahPOV)",
+  "durasi": "-",
+  "judul": "Setiap Kali Dia Foto, Sosok Itu Makin Dekat... Kutukan Candi Terlarang!",
+  "status": "TERJADWAL",
+  "tanggal": "9 Okt 19:00",
+  "tipe": "LONG",
+  "url": "https://youtu.be/iSIaj3nG_vk"
+ },
+ {
+  "channel": "TrueCaseFiles",
+  "durasi": "-",
+  "judul": "3 shorts",
+  "status": "TAYANG",
+  "tanggal": "8 Okt",
+  "tipe": "SHORT",
+  "url": ""
+ },
+ {
+  "channel": "DarkMindFiles",
+  "durasi": "-",
+  "judul": "3 shorts",
+  "status": "TAYANG",
+  "tanggal": "8 Okt",
+  "tipe": "SHORT",
+  "url": ""
+ },
+ {
+  "channel": "CosmosUnknownTV",
+  "durasi": "-",
+  "judul": "3 shorts",
+  "status": "TAYANG",
+  "tanggal": "8 Okt",
+  "tipe": "SHORT",
+  "url": ""
+ },
+ {
+  "channel": "LimaMisteri",
+  "durasi": "-",
+  "judul": "1 video",
+  "status": "TAYANG",
+  "tanggal": "8 Okt",
+  "tipe": "-",
+  "url": ""
+ },
+ {
+  "channel": "KisahAlkitab",
+  "durasi": "-",
+  "judul": "Daud vs Goliat (long) — produksi jadi, kena limit",
+  "status": "ANTRE",
+  "tanggal": "-",
+  "tipe": "LONG",
+  "url": ""
+ },
+ {
+  "channel": "Tiny Builders",
+  "judul": "We Built a WORKING Mini Diesel Water Pump! (Miniature Farm Build)",
+  "url": "https://www.youtube.com/watch?v=SbN_Xgr2jq8",
+  "tipe": "long",
+  "waktu": "2026-10-09T15:20+07:00"
+ },
+ {
+  "channel": "Tiny Builders",
+  "judul": "PULL the Starter... The Mini Diesel ROARS to Life!",
+  "url": "https://youtube.com/shorts/uiTYVHzYzjU",
+  "tipe": "short",
+  "waktu": "2026-10-09T15:18+07:00",
+  "catatan": "terjadwal 21:00 WIB"
+ },
+ {
+  "channel": "Tiny Builders",
+  "judul": "Water GUSHING From a Miniature Pump!",
+  "url": "https://youtube.com/shorts/GKvuJopBwcY",
+  "tipe": "short",
+  "waktu": "2026-10-09T15:38+07:00",
+  "catatan": "terjadwal 10 Okt 03:00 WIB"
+ },
+ {
+  "channel": "Tiny Builders",
+  "judul": "Laying BRICKS... One Tiny Brick at a Time",
+  "url": "https://youtube.com/shorts/Xbdku0L_4Xw",
+  "tipe": "short",
+  "waktu": "2026-10-09T15:38+07:00",
+  "catatan": "terjadwal 10 Okt 07:00 WIB"
+ }
+]
