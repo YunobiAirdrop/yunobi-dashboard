@@ -6,7 +6,7 @@ Membaca data LIVE dari mesin dan menghasilkan dashboard.html tunggal
 
 Section (urut dari atas):
   1. Ringkasan (kartu angka)
-  2. Jadwal Produksi (18 channel YouTube, data statis)
+  2. Jadwal Produksi (21 channel YouTube, data statis)
   3. Riwayat Upload (dari upload-history.json — bisa diupdate manual)
   4. Antrean Upload (dari retry-queue/*.json, kartu + tombol salin perintah)
   5. Blog Hari Ini
@@ -37,27 +37,31 @@ RETRY_DIR = os.path.join(BASE, "workspace/youtube-otomatis/retry-queue")
 MEMORY_DIR = os.path.join(BASE, "memory")
 DATA_DIR = os.path.join(BASE, "workspace/blog-otomatis/data")
 
-# 18 channel YouTube (dari backup-repo/docs/03-youtube.md).
-# (nama, handle, niche, pola upload). Jam produksi semua: 16:11 WIB.
+# 21 channel YouTube (verifikasi live 2026-10-16).
+# (nama, handle, niche, pola upload). Pola: 3 shorts + 1 long/hari.
+# Long 19:00 WIB; shorts 09:00/14:00/21:00 WIB (Strange Tales: 21:00/03:00/07:00).
 CHANNELS = [
-    ("Kisah Horor", "@KisahPOV", "horor ID, voice Mudiwa", "long/shorts bergantian"),
-    ("Cerita Rakyat (POV Sejarah)", "@ceritarakyat862", "sejarah ID, voice Mudiwa", "long/shorts bergantian"),
-    ("Lima Misteri", "@LimaMisteri", "countdown misteri ID, voice Mudiwa", "long/shorts bergantian"),
-    ("Kisah Dharma", "@KisahDharma", "Hindu, footage Pexels", "long/shorts bergantian"),
-    ("Jejak Islami", "@JejakIslami-h3d", "Islam, footage Pexels", "long/shorts bergantian"),
-    ("Kisah Alkitab", "@KisahAlkitab-k9j", "Kristen, footage Pexels", "long/shorts bergantian"),
-    ("Jejak Buddha", "@JejakBuddha", "Buddha, footage Pexels", "long/shorts bergantian"),
-    ("Tiny Builders", "@tinybuilders-d5z", "miniatur AI (satu-satunya full-AI)", "long/shorts bergantian"),
-    ("InkTime", "@InkTime-d3t", "explainer whiteboard EN", "harian (mulai 9 Okt)"),
+    ("Kisah Horor", "@KisahPOV", "horor ID, voice Mudiwa", "3 shorts + 1 long/hari"),
+    ("Cerita Rakyat (POV Sejarah)", "@ceritarakyat862", "sejarah ID, voice Mudiwa", "3 shorts + 1 long/hari"),
+    ("Lima Misteri", "@LimaMisteri", "countdown misteri ID, voice Mudiwa", "3 shorts + 1 long/hari"),
+    ("Kisah Dharma", "@KisahDharma", "Hindu, footage Pexels", "3 shorts + 1 long/hari"),
+    ("Jejak Islami", "@JejakIslami-h3d", "Islam, footage Pexels", "3 shorts + 1 long/hari"),
+    ("Kisah Alkitab", "@KisahAlkitab-k9j", "Kristen, footage Pexels", "3 shorts + 1 long/hari"),
+    ("Jejak Buddha", "@JejakBuddha", "Buddha, footage Pexels", "3 shorts + 1 long/hari"),
+    ("Tiny Builders", "@tinybuilders-d5z", "miniatur AI (satu-satunya full-AI)", "3 shorts + 1 long/hari"),
+    ("InkTime", "@InkTime-d3t", "explainer whiteboard EN", "3 shorts + 1 long/hari"),
     ("Strange Tales", "@StrangeTales-g6n", "shorts EN, voice Miles, target USA", "3 shorts/hari (21:00/03:00/07:00)"),
-    ("Ancient Empires", "@AncientEmpiresTV", "sejarah EN", "harian"),
-    ("Echoes of the Past", "@EchoesOfThePast-e9n", "history EN", "harian"),
-    ("Tales of Dread", "@TalesOfDreadTV", "horror EN", "harian"),
-    ("The Dark Mind Files", "@TheDarkMindFiles-s6n", "psikologi/mind EN", "harian"),
-    ("Mystery Shadows", "@MysteryShadowsTV", "misteri EN", "harian"),
-    ("Cosmos Unknown", "@CosmosUnknownTV", "luar angkasa EN", "harian"),
-    ("True Case Files", "@TrueCaseFilesTV", "true crime EN", "harian"),
-    ("Bizarre World Daily", "@BizarreWorldDaily", "weird EN", "harian"),
+    ("Ancient Empires", "@AncientEmpiresTV", "sejarah EN", "3 shorts + 1 long/hari"),
+    ("Echoes of History", "@EchoesOfThePast-e9m", "history EN", "3 shorts + 1 long/hari"),
+    ("Tales of Dread", "@TalesOfDreadTV", "horror EN", "3 shorts + 1 long/hari"),
+    ("The Dark Mind Files", "@TheDarkMindFiles-s6i", "psikologi/mind EN", "3 shorts + 1 long/hari"),
+    ("Mystery Shadows", "@MysteryShadowsTV", "misteri EN", "3 shorts + 1 long/hari"),
+    ("Cosmos Unknown", "@CosmosUnknownTV", "luar angkasa EN", "3 shorts + 1 long/hari"),
+    ("True Case Files", "@TrueCaseFilesTV", "true crime EN", "3 shorts + 1 long/hari"),
+    ("Bizarre World Daily", "@BizarreWorldDaily", "weird EN", "3 shorts + 1 long/hari"),
+    ("Fakta Bola Dunia", "@FaktaBolaDuniaID", "fakta bola ID", "3 shorts + 1 long/hari"),
+    ("Macam Macam", "@MacamMacamID", "fakta unik ID", "3 shorts + 1 long/hari"),
+    ("Info Loker Terkini", "@InfoLokerTerkiniID", "info loker ID", "3 shorts + 1 long/hari"),
 ]
 
 BLOG_NAMES = {
@@ -131,23 +135,29 @@ def load_queue():
         try:
             with open(f, encoding="utf-8") as fh:
                 d = json.load(fh)
-            gagal = parse_dt(d.get("gagal_pada"))
+            # Dukung berbagai format field tanggal (gagal_pada/blocked_at/queued_at_wib/date)
+            gagal = (parse_dt(d.get("gagal_pada")) or parse_dt(d.get("blocked_at"))
+                     or parse_dt(d.get("queued_at_wib")) or parse_dt(d.get("date")))
             if gagal is None:
-                continue
+                # Fallback: pakai waktu modifikasi file
+                try:
+                    gagal = datetime.fromtimestamp(os.path.getmtime(f), tz=WIB)
+                except Exception:
+                    continue
             siap_pada = gagal + timedelta(hours=23)
             # Tipe + durasi: ffprobe dulu, fallback tebak dari nama file
-            vp = d.get("video_path", "") or ""
+            vp = d.get("video_path") or d.get("video") or d.get("video_file") or ""
             tipe, dur = (None, None)
             if vp and os.path.isfile(vp):
                 tipe, dur = probe_video(vp)
             if not tipe:
                 tipe = tebak_tipe_dari_nama(os.path.basename(vp))
             items.append({
-                "channel": d.get("channel", "?"),
-                "slot": d.get("slot_target", "-"),
+                "channel": d.get("channel") or d.get("channel_handle") or "?",
+                "slot": d.get("slot_target") or d.get("schedule") or d.get("schedule_target") or d.get("scheduled_publish") or "-",
                 "gagal_pada": gagal,
                 "siap_pada": siap_pada,
-                "sebab": d.get("sebab", "-"),
+                "sebab": d.get("sebab") or d.get("reason") or d.get("note") or "-",
                 "file": os.path.basename(f),
                 "tipe": tipe or "-",
                 "durasi": dur or "-",
